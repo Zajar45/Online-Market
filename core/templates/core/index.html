@@ -1,0 +1,68 @@
+{% extends 'core/base.html' %}
+{% block title%}index{% endblock%}
+
+            {% block content %}
+            <div class="mt-2 mb-0 bg-light container-fluid"><h2 class="text-muted text-center ">NEWEST ITEMS</h2></div>
+            
+            <div class="row px-5 py-3 bg-light mt-0">
+                
+                    {% for item in items %}
+                    <div class="col-3 mt-5 ">
+                        <a href="{% url 'item:detail' item.id %}" class="text-decoration-none">
+                            <div class="card mb-2">
+                                <img src=" {{ item.image.url }}" alt="" class="card-img-top">
+                                <div class="text-muted card-body ">
+                                    <h2 class="card-title">{{ item.name }}</h2>
+                                    <p class="card-text"><strong class="me-2">price:</strong>{{ item.price }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                
+            </div>
+
+            <div class="row mt-3 px-2 py-2 bg-light">
+                <h3 class="text-center mt-5">CATEGORIES</h3>
+                {% for category in categories %}
+                <div class="col-4 mt-5 bg-white mb-3">
+                    
+                        <div class="card mb-2">
+                            
+                            <div class="text-muted card-body ">
+                                <h2 class="card-title">{{ category.name }}</h2>
+                                <p class="card-text"><strong class="me-2">{{ category.items.count }}</strong>items</p>
+                            </div>
+                        </div>
+                    
+                </div>
+                {% endfor %}
+            
+        </div>
+            
+            {% endblock %}
+        
+    
+    <!--maIn-->
+
+    <!-- footer -->
+    <footer class="d-flex bg-dark mt-6 ">
+        <div class="col-lg-8 me-3 mx-5">
+            <h5 class="text-white">About</h5>
+            <p class="text-white">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium sunt cum, eveniet quam fugiat placeat iusto laborum doloremque, laboriosam, labore expedita aliquam repellendus ducimus necessitatibus nemo temporibus ex minus odit?</p>
+        </div>
+        <div class="col-4 mx-5">
+            <h5 class="text-white">About</h5>
+            <ul>
+                <li class="nav-link text-white">About</li>
+                <li class="nav-link text-white">Contact</li>
+                <li class="nav-link text-white">Privacy policy</li>
+            </ul>
+        </div>
+    </footer>
+    <!-- footer -->
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

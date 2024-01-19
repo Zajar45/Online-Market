@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block title%}New Conversation{% endblock%}
+
+{% block content %}
+
+<div class="container bg-light mt-3 mb-3 py-3 px-20">
+    <p class="card-title text-center bg-pass p-5">NEW CONVERSATION</p>
+        <form action="." method="post">
+            {% csrf_token %}
+
+            <div class="mb-2">
+                <label for="" class="mb-2">Message to : <span><p class="text-muted">{{ item.created_by.username }}</p></span>  </label><br>
+                {{ form.content }}
+            </div>
+
+            <button class="btn btn-success mt-5 mb-2 m-auto">Send</button>
+        </form>
+
+</div>
+
+{% endblock %}

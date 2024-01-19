@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% block title%}{{ item.name }}{% endblock%}
+
+{% block content%}
+
+<div class="row my-5 mx-3 px-4">
+    
+    <div class="col-7 mb-3 px-4 mt-2 me-5 bg-light">
+        <div class="card ">
+            <img src="{{ item.image.url }}" alt="">
+        </div>
+    </div>
+
+    <div class="col-4 mb-3 mt-2 px-3 py-5 bg-light">
+        <div class="card-body px-5">
+            <h1>{{ item.name }}</h1>
+            <p class="text-muted"><strong class="me-2">price:</strong>{{ item.price }}</p>
+            <p class="text-muted"><strong class="me-2">Seller:</strong>{{ item.created_by.username }}</p>
+            
+            {% if item.description %}
+            <p class="text-muted">
+                <strong class="me-2 mt-2">Description:</strong><br>{{ item.description }}
+            </p>
+            {% endif %}
+
+            {% if item.created_by == request.user%}
+            <div class="bg-white px-3 py-4 mt-5">
+                <h3 class="text-muted  p-1">This is your item</h3>
+                <a href="{% url 'item:edit-item' item.id %}" role="button" class="btn btn-secondary mt-2 me-2 mb-2 text-decoration-none">Edit</a>
+                <a href="{% url 'item:delete-item' item.id %}" role="button" class="btn btn-danger mt-2 mb-2 text-decoration-none">Delete</a>
+            </div>
+            {% else %}
+                <a href="{% url 'Conversation:new' item.id %}" role="button" class="btn btn-success">Contact seller</a>
+            {% endif %}
+        </div>
+    </div>
+    
+</div>
+                                                                                            
+<div class="row px-5 bg-light mb-5">
+    <div class="mt-5 bg-light"><h4 class=" text-center mb-6 py-6">RELATED ITEMS</h4></div>
+                
+    {% for item in related_item %}
+    <div class="col-4 px-3 mt-5">
+        <a href="{% url 'item:detail' item.id %} " class="text-decoration-none">
+            <div class="card mb-2">
+                <img src=" {{ item.image.url }}" alt="" class="card-img-top">
+                <div class="text-muted card-body ">
+                    <h2 class="card-title">{{ item.name }}</h2>
+                    <p class="card-text"><strong class="me-2">price:</strong>{{ item.price }}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+{% endblock%}
+                                                                                                
