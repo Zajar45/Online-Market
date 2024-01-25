@@ -37,6 +37,7 @@ def details(request, pk):
 
 @login_required
 def new(request):
+    title = 'New'
     if request.method == 'POST':
         form = NewItem(request.POST, request.FILES)
         if form.is_valid():
@@ -48,8 +49,8 @@ def new(request):
         return redirect('item:detail', pk=item.id)
     else:
         form = NewItem()
-
-    return render(request, 'items/form.html', {'form':form})
+    
+    return render(request, 'items/form.html', {'form':form, 'title':title})
 
 @login_required
 def edit(request, pk):
@@ -65,8 +66,8 @@ def edit(request, pk):
         return redirect('item:detail', pk=items.id)
     else:
         form = EditItem(instance=items)
-
-    return render(request, 'items/form.html', {'form':form})
+    title = 'Edit'
+    return render(request, 'items/form.html', {'form':form, 'title':title})
 
 @login_required
 def delete(request, pk):
